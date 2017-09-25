@@ -9,6 +9,7 @@ const getMiddleware = () => {
     const middlewares = [thunk];
 
     if (process.env.NODE_ENV !== 'production') {
+        middlewares.push(require('redux-immutable-state-invariant').default());
         middlewares.push(logger);
     }
 
