@@ -1,17 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
         vendor: [
             'classnames',
             'debug',
+            'html-entities',
+            'immutable',
             'react',
             'react-dom',
             'react-redux',
             'react-router',
             'react-router-dom',
+            'react-transition-group',
             'react-waypoint',
             'redux',
             'redux-thunk',
@@ -41,6 +46,16 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'React-Redux-Webpack Starter',
             template: path.resolve(__dirname, '../src/templates/index.ejs'),
+        }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            reportFilename: 'bundle-analyzer/index.html',
+            defaultSizes: 'parsed',
+            openAnalyzer: false,
+            generateStatsFile: false,
+            statsFilename: 'stats.json',
+            statsOptions: null,
+            logLevel: 'info',
         }),
     ],
     module: {
